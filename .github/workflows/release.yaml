@@ -1,0 +1,36 @@
+name: "Publish library"
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+      - name: Setup gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Verify release tag
+        run: |
+          set -euxo pipefail
+          cd ${{ github.workspace }}
+          git config gpg.ssh.allowedSignersFile ./config/allowed_release_signers
+          git fetch --tags -f
+          git tag -v ${{ github.ref_name }}
+      - name: Publish package
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
