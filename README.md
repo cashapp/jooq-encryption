@@ -19,7 +19,7 @@ In most cases, that means supplying some configuration and a database schema for
 so it could run, interpret the schema, and generate corresponding classes.  
 That configuration can be supplied with the [jOOQ Gradle plugin](https://www.jooq.org/doc/latest/manual/code-generation/codegen-gradle/).
 
-In order to support FLE, you must use the [`EncryptionAwareJavaGenerator`](src/main/kotlin/com/squareup/cash/jooq/EncryptionAwareJavaGenerator.kt).
+In order to support FLE, you must use the [`EncryptionAwareJavaGenerator`](src/main/kotlin/app/cash/jooq/EncryptionAwareJavaGenerator.kt).
 
 Add the following to your gradle build file in order to add this library to jOOQ's code generation classpath:
 ```kotlin
@@ -58,7 +58,7 @@ The criteria for a column to support encryption are:
 
 Columns eligible for encryption will have a [`Converter`](https://www.jooq.org/javadoc/latest/org.jooq/org/jooq/Converter.html)
 associated with them.  
-See [`ColumnEncryptionConverter`](src/main/kotlin/com/squareup/cash/jooq/ColumnEncryptionConverter.kt) for more details.
+See [`ColumnEncryptionConverter`](src/main/kotlin/app/cash/jooq/ColumnEncryptionConverter.kt) for more details.
 
 ### Encryption key setup
 
