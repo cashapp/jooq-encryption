@@ -12,7 +12,6 @@ repositories {
 
 dependencies {
     implementation("com.google.crypto.tink:tink-android:1.7.0")
-    implementation("com.google.guava:guava:31.1-jre")
     implementation("org.jooq:jooq-codegen:3.17.6")
     implementation("org.jooq:jooq-meta:3.17.6")
     implementation("org.jooq:jooq-meta-extensions:3.17.6")
