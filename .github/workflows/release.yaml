@@ -28,9 +28,15 @@ jobs:
           git config gpg.ssh.allowedSignersFile ./config/allowed_release_signers
           git fetch --tags -f
           git tag -v ${{ github.ref_name }}
-      - name: Publish package
+      - name: Build library
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          arguments: |
+            -Pversion=${{ github.ref_name }}
+            build
+      - name: Release versioned
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: "./build/libs/jooq-encryption-${{ github.ref_name }}.jar"
+          token: ${{ secrets.GITHUB_TOKEN }}

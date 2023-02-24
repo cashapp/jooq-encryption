@@ -4,7 +4,6 @@ plugins {
 }
 
 group = "app.cash.jooq.encryption"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
