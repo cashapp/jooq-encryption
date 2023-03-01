@@ -42,8 +42,12 @@ jobs:
           artifacts: "./build/libs/jooq-encryption-${{ env.release_version }}.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish the artifacts
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            -Pversion=${{ env.release_version }} 
+            publishAllPublicationsToMavenCentralRepository
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
-        run: gradle -Pversion=${{ env.release_version }} publishAllPublicationsToMavenCentralRepository
