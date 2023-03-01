@@ -36,13 +36,13 @@ jobs:
           arguments: |
             -Pversion=${{ env.release_version }}
             build
-      - name: Release versioned
+      - name: Publish to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: "./build/libs/jooq-encryption-${{ env.release_version }}.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish the artifacts
+      - name: Publish to MavenCentral
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
