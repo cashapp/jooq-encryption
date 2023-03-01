@@ -16,8 +16,6 @@ buildscript {
 apply(plugin = "com.vanniktech.maven.publish")
 apply(from = "$rootDir/gradle-mvn-publish.gradle")
 
-group = "app.cash.jooq"
-
 repositories {
     mavenCentral()
 }
