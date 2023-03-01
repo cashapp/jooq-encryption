@@ -42,11 +42,17 @@ jobs:
           allowUpdates: true
           artifacts: "./build/libs/jooq-encryption-${{ env.release_version }}.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set gradle publish version
+        run: |
+          set -euxo pipefail
+          version_date=$(date +%Y%m%d.%H%M)
+          version_sha=$(git rev-parse --short HEAD)
+          echo "VERSION_NAME=${{ env.release_version }}-$version_date-$version_sha" >> gradle.properties
+          cat gradle.properties
       - name: Publish to MavenCentral
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
-            -Pversion=${{ env.release_version }} 
             publishAllPublicationsToMavenCentralRepository
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
