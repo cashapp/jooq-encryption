@@ -14,7 +14,7 @@ jobs:
       - name: Check release version number
         run: |
           set -euxo pipefail
-          release_version=`echo ${{ github.ref_name }} | grep -o "\d\+\.\d\+\.\d\+"`
+          release_version=`echo ${{ github.ref_name }} | grep -o "\d+\.\d+\.\d+"`
       - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
