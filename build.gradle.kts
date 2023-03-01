@@ -33,6 +33,10 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
+kotlin {
+    jvmToolchain(18)
+}
+
 sourceSets.test {
     java.srcDirs("src/test/jooq-generated")
 }
