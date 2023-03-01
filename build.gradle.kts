@@ -3,6 +3,19 @@ plugins {
     kotlin("jvm") version "1.7.20"
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven(url = "https://plugins.gradle.org/m2/")
+    }
+    dependencies {
+        classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
+    }
+}
+
+apply(plugin = "com.vanniktech.maven.publish")
+apply(from = "$rootDir/gradle-mvn-publish.gradle")
+
 group = "app.cash.jooq.encryption"
 
 repositories {
