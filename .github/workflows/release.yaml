@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Check release version number
+        run: |
+          set -euxo pipefail
+          release_version=`echo ${{ github.ref_name }} | grep -o "\d\+\.\d\+\.\d\+"`
       - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
@@ -29,11 +33,21 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
-            -Pversion=${{ github.ref_name }}
+            -Pversion=${{ env.release_version }}
             build
       - name: Release versioned
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          artifacts: "./build/libs/jooq-encryption-${{ github.ref_name }}.jar"
+          artifacts: "./build/libs/jooq-encryption-${{ env.release_version }}.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish the artifacts
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            -Pversion=${{ env.release_version }} 
+            publishAllPublicationsToMavenCentralRepository
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}

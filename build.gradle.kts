@@ -3,6 +3,19 @@ plugins {
     kotlin("jvm") version "1.7.20"
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven(url = "https://plugins.gradle.org/m2/")
+    }
+    dependencies {
+        classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
+    }
+}
+
+apply(plugin = "com.vanniktech.maven.publish")
+apply(from = "$rootDir/gradle-mvn-publish.gradle")
+
 group = "app.cash.jooq.encryption"
 
 repositories {
@@ -18,6 +31,10 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.24.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+}
+
+kotlin {
+    jvmToolchain(18)
 }
 
 sourceSets.test {
