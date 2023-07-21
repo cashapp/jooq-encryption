@@ -23,13 +23,13 @@ jobs:
           java-version: 17
       - name: Setup gradle
         uses: gradle/gradle-build-action@v2
-      - name: Verify release tag
-        run: |
-          set -euxo pipefail
-          cd ${{ github.workspace }}
-          git config gpg.ssh.allowedSignersFile ./config/allowed_release_signers
-          git fetch --tags -f
-          git tag -v ${{ github.ref_name }}
+      - name: "Verify release tag"
+        uses: cashapp/check-signature-action@v0.2.0
+        id: check-tag-sig
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          allowed-release-signers: yoavamit
       - name: Build library
         uses: gradle/gradle-build-action@v2
         with:
