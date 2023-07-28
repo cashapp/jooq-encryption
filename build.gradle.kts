@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.vanniktech.maven.publish") version "0.25.3"
     kotlin("jvm") version "1.7.20"
 }
 
@@ -8,13 +9,7 @@ buildscript {
         mavenCentral()
         maven(url = "https://plugins.gradle.org/m2/")
     }
-    dependencies {
-        classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
-    }
 }
-
-apply(plugin = "com.vanniktech.maven.publish")
-apply(from = "$rootDir/gradle-mvn-publish.gradle")
 
 repositories {
     mavenCentral()
