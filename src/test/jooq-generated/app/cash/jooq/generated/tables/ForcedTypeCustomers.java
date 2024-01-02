@@ -9,17 +9,17 @@ import app.cash.jooq.generated.Keys;
 import app.cash.jooq.generated.tables.records.ForcedTypeCustomersRecord;
 
 import java.time.LocalDateTime;
-import java.util.function.Function;
+import java.util.Collection;
 
+import org.jooq.Condition;
 import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Function6;
 import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Records;
-import org.jooq.Row6;
+import org.jooq.PlainSQL;
+import org.jooq.QueryPart;
+import org.jooq.SQL;
 import org.jooq.Schema;
-import org.jooq.SelectField;
+import org.jooq.Select;
+import org.jooq.Stringly;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -58,12 +58,12 @@ public class ForcedTypeCustomers extends TableImpl<ForcedTypeCustomersRecord> {
     /**
      * The column <code>FORCED_TYPE_CUSTOMERS.CREATED_AT</code>.
      */
-    public final TableField<ForcedTypeCustomersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("CREATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<ForcedTypeCustomersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("CREATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>FORCED_TYPE_CUSTOMERS.UPDATED_AT</code>.
      */
-    public final TableField<ForcedTypeCustomersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("UPDATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<ForcedTypeCustomersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("UPDATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>FORCED_TYPE_CUSTOMERS.FIRST_NAME</code>.
@@ -81,11 +81,11 @@ public class ForcedTypeCustomers extends TableImpl<ForcedTypeCustomersRecord> {
     public final TableField<ForcedTypeCustomersRecord, String> EMAIL_ADDRESS = createField(DSL.name("EMAIL_ADDRESS"), SQLDataType.VARBINARY(2048), this, "", org.jooq.Converter.ofNullable(byte[].class, String.class,source -> new String(source), source -> source.getBytes()));
 
     private ForcedTypeCustomers(Name alias, Table<ForcedTypeCustomersRecord> aliased) {
-        this(alias, aliased, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
-    private ForcedTypeCustomers(Name alias, Table<ForcedTypeCustomersRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table());
+    private ForcedTypeCustomers(Name alias, Table<ForcedTypeCustomersRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table(), where);
     }
 
     /**
@@ -107,10 +107,6 @@ public class ForcedTypeCustomers extends TableImpl<ForcedTypeCustomersRecord> {
      */
     public ForcedTypeCustomers() {
         this(DSL.name("FORCED_TYPE_CUSTOMERS"), null);
-    }
-
-    public <O extends Record> ForcedTypeCustomers(Table<O> child, ForeignKey<O, ForcedTypeCustomersRecord> key) {
-        super(child, key, FORCED_TYPE_CUSTOMERS);
     }
 
     @Override
@@ -162,27 +158,87 @@ public class ForcedTypeCustomers extends TableImpl<ForcedTypeCustomersRecord> {
         return new ForcedTypeCustomers(name.getQualifiedName(), null);
     }
 
-    // -------------------------------------------------------------------------
-    // Row6 type methods
-    // -------------------------------------------------------------------------
-
+    /**
+     * Create an inline derived table from this table
+     */
     @Override
-    public Row6<String, LocalDateTime, LocalDateTime, String, String, String> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public ForcedTypeCustomers where(Condition condition) {
+        return new ForcedTypeCustomers(getQualifiedName(), aliased() ? this : null, null, condition);
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Function6<? super String, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
+    @Override
+    public ForcedTypeCustomers where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super String, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
+    @Override
+    public ForcedTypeCustomers where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public ForcedTypeCustomers where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public ForcedTypeCustomers where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public ForcedTypeCustomers where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public ForcedTypeCustomers where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public ForcedTypeCustomers where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public ForcedTypeCustomers whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public ForcedTypeCustomers whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

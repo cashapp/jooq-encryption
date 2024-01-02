@@ -10,17 +10,17 @@ import app.cash.jooq.generated.Keys;
 import app.cash.jooq.generated.tables.records.EncryptedCustomersRecord;
 
 import java.time.LocalDateTime;
-import java.util.function.Function;
+import java.util.Collection;
 
+import org.jooq.Condition;
 import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Function6;
 import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Records;
-import org.jooq.Row6;
+import org.jooq.PlainSQL;
+import org.jooq.QueryPart;
+import org.jooq.SQL;
 import org.jooq.Schema;
-import org.jooq.SelectField;
+import org.jooq.Select;
+import org.jooq.Stringly;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
@@ -59,12 +59,12 @@ public class EncryptedCustomers extends TableImpl<EncryptedCustomersRecord> {
     /**
      * The column <code>ENCRYPTED_CUSTOMERS.CREATED_AT</code>.
      */
-    public final TableField<EncryptedCustomersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("CREATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<EncryptedCustomersRecord, LocalDateTime> CREATED_AT = createField(DSL.name("CREATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>ENCRYPTED_CUSTOMERS.UPDATED_AT</code>.
      */
-    public final TableField<EncryptedCustomersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("UPDATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field("CURRENT_TIMESTAMP", SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<EncryptedCustomersRecord, LocalDateTime> UPDATED_AT = createField(DSL.name("UPDATED_AT"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("CURRENT_TIMESTAMP"), SQLDataType.LOCALDATETIME)), this, "");
 
     /**
      * The column <code>ENCRYPTED_CUSTOMERS.FIRST_NAME</code>.
@@ -82,11 +82,11 @@ public class EncryptedCustomers extends TableImpl<EncryptedCustomersRecord> {
     public final TableField<EncryptedCustomersRecord, byte[]> EMAIL_ADDRESS = createField(DSL.name("EMAIL_ADDRESS"), SQLDataType.VARBINARY, this, "", new ColumnEncryptionConverter("encrypted_customers", "email_address"));
 
     private EncryptedCustomers(Name alias, Table<EncryptedCustomersRecord> aliased) {
-        this(alias, aliased, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
-    private EncryptedCustomers(Name alias, Table<EncryptedCustomersRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table());
+    private EncryptedCustomers(Name alias, Table<EncryptedCustomersRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.table(), where);
     }
 
     /**
@@ -108,10 +108,6 @@ public class EncryptedCustomers extends TableImpl<EncryptedCustomersRecord> {
      */
     public EncryptedCustomers() {
         this(DSL.name("ENCRYPTED_CUSTOMERS"), null);
-    }
-
-    public <O extends Record> EncryptedCustomers(Table<O> child, ForeignKey<O, EncryptedCustomersRecord> key) {
-        super(child, key, ENCRYPTED_CUSTOMERS);
     }
 
     @Override
@@ -163,27 +159,87 @@ public class EncryptedCustomers extends TableImpl<EncryptedCustomersRecord> {
         return new EncryptedCustomers(name.getQualifiedName(), null);
     }
 
-    // -------------------------------------------------------------------------
-    // Row6 type methods
-    // -------------------------------------------------------------------------
-
+    /**
+     * Create an inline derived table from this table
+     */
     @Override
-    public Row6<String, LocalDateTime, LocalDateTime, String, String, byte[]> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public EncryptedCustomers where(Condition condition) {
+        return new EncryptedCustomers(getQualifiedName(), aliased() ? this : null, null, condition);
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Function6<? super String, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super byte[], ? extends U> from) {
-        return convertFrom(Records.mapping(from));
+    @Override
+    public EncryptedCustomers where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super String, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super byte[], ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
+    @Override
+    public EncryptedCustomers where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public EncryptedCustomers where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public EncryptedCustomers where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public EncryptedCustomers where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public EncryptedCustomers where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public EncryptedCustomers where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public EncryptedCustomers whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public EncryptedCustomers whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

@@ -8,10 +8,7 @@ import app.cash.jooq.generated.tables.EncryptedCustomers;
 
 import java.time.LocalDateTime;
 
-import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record6;
-import org.jooq.Row6;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -19,7 +16,7 @@ import org.jooq.impl.UpdatableRecordImpl;
  * The table <code>PUBLIC.ENCRYPTED_CUSTOMERS</code>.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
-public class EncryptedCustomersRecord extends UpdatableRecordImpl<EncryptedCustomersRecord> implements Record6<String, LocalDateTime, LocalDateTime, String, String, byte[]> {
+public class EncryptedCustomersRecord extends UpdatableRecordImpl<EncryptedCustomersRecord> {
 
     private static final long serialVersionUID = 1L;
 
@@ -117,157 +114,6 @@ public class EncryptedCustomersRecord extends UpdatableRecordImpl<EncryptedCusto
     }
 
     // -------------------------------------------------------------------------
-    // Record6 type implementation
-    // -------------------------------------------------------------------------
-
-    @Override
-    public Row6<String, LocalDateTime, LocalDateTime, String, String, byte[]> fieldsRow() {
-        return (Row6) super.fieldsRow();
-    }
-
-    @Override
-    public Row6<String, LocalDateTime, LocalDateTime, String, String, byte[]> valuesRow() {
-        return (Row6) super.valuesRow();
-    }
-
-    @Override
-    public Field<String> field1() {
-        return EncryptedCustomers.ENCRYPTED_CUSTOMERS.CUSTOMER_TOKEN;
-    }
-
-    @Override
-    public Field<LocalDateTime> field2() {
-        return EncryptedCustomers.ENCRYPTED_CUSTOMERS.CREATED_AT;
-    }
-
-    @Override
-    public Field<LocalDateTime> field3() {
-        return EncryptedCustomers.ENCRYPTED_CUSTOMERS.UPDATED_AT;
-    }
-
-    @Override
-    public Field<String> field4() {
-        return EncryptedCustomers.ENCRYPTED_CUSTOMERS.FIRST_NAME;
-    }
-
-    @Override
-    public Field<String> field5() {
-        return EncryptedCustomers.ENCRYPTED_CUSTOMERS.LAST_NAME;
-    }
-
-    @Override
-    public Field<byte[]> field6() {
-        return EncryptedCustomers.ENCRYPTED_CUSTOMERS.EMAIL_ADDRESS;
-    }
-
-    @Override
-    public String component1() {
-        return getCustomerToken();
-    }
-
-    @Override
-    public LocalDateTime component2() {
-        return getCreatedAt();
-    }
-
-    @Override
-    public LocalDateTime component3() {
-        return getUpdatedAt();
-    }
-
-    @Override
-    public String component4() {
-        return getFirstName();
-    }
-
-    @Override
-    public String component5() {
-        return getLastName();
-    }
-
-    @Override
-    public byte[] component6() {
-        return getEmailAddress();
-    }
-
-    @Override
-    public String value1() {
-        return getCustomerToken();
-    }
-
-    @Override
-    public LocalDateTime value2() {
-        return getCreatedAt();
-    }
-
-    @Override
-    public LocalDateTime value3() {
-        return getUpdatedAt();
-    }
-
-    @Override
-    public String value4() {
-        return getFirstName();
-    }
-
-    @Override
-    public String value5() {
-        return getLastName();
-    }
-
-    @Override
-    public byte[] value6() {
-        return getEmailAddress();
-    }
-
-    @Override
-    public EncryptedCustomersRecord value1(String value) {
-        setCustomerToken(value);
-        return this;
-    }
-
-    @Override
-    public EncryptedCustomersRecord value2(LocalDateTime value) {
-        setCreatedAt(value);
-        return this;
-    }
-
-    @Override
-    public EncryptedCustomersRecord value3(LocalDateTime value) {
-        setUpdatedAt(value);
-        return this;
-    }
-
-    @Override
-    public EncryptedCustomersRecord value4(String value) {
-        setFirstName(value);
-        return this;
-    }
-
-    @Override
-    public EncryptedCustomersRecord value5(String value) {
-        setLastName(value);
-        return this;
-    }
-
-    @Override
-    public EncryptedCustomersRecord value6(byte[] value) {
-        setEmailAddress(value);
-        return this;
-    }
-
-    @Override
-    public EncryptedCustomersRecord values(String value1, LocalDateTime value2, LocalDateTime value3, String value4, String value5, byte[] value6) {
-        value1(value1);
-        value2(value2);
-        value3(value3);
-        value4(value4);
-        value5(value5);
-        value6(value6);
-        return this;
-    }
-
-    // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
 
@@ -290,6 +136,7 @@ public class EncryptedCustomersRecord extends UpdatableRecordImpl<EncryptedCusto
         setFirstName(firstName);
         setLastName(lastName);
         setEmailAddress(emailAddress);
+        resetChangedOnNotNull();
     }
 
     /**
@@ -305,6 +152,7 @@ public class EncryptedCustomersRecord extends UpdatableRecordImpl<EncryptedCusto
             setFirstName(value.getFirstName());
             setLastName(value.getLastName());
             setEmailAddress(value.getEmailAddress());
+            resetChangedOnNotNull();
         }
     }
 }

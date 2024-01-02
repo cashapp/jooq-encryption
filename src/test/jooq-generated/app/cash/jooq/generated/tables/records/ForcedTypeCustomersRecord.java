@@ -8,10 +8,7 @@ import app.cash.jooq.generated.tables.ForcedTypeCustomers;
 
 import java.time.LocalDateTime;
 
-import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record6;
-import org.jooq.Row6;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -19,7 +16,7 @@ import org.jooq.impl.UpdatableRecordImpl;
  * The table <code>PUBLIC.FORCED_TYPE_CUSTOMERS</code>.
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
-public class ForcedTypeCustomersRecord extends UpdatableRecordImpl<ForcedTypeCustomersRecord> implements Record6<String, LocalDateTime, LocalDateTime, String, String, String> {
+public class ForcedTypeCustomersRecord extends UpdatableRecordImpl<ForcedTypeCustomersRecord> {
 
     private static final long serialVersionUID = 1L;
 
@@ -117,157 +114,6 @@ public class ForcedTypeCustomersRecord extends UpdatableRecordImpl<ForcedTypeCus
     }
 
     // -------------------------------------------------------------------------
-    // Record6 type implementation
-    // -------------------------------------------------------------------------
-
-    @Override
-    public Row6<String, LocalDateTime, LocalDateTime, String, String, String> fieldsRow() {
-        return (Row6) super.fieldsRow();
-    }
-
-    @Override
-    public Row6<String, LocalDateTime, LocalDateTime, String, String, String> valuesRow() {
-        return (Row6) super.valuesRow();
-    }
-
-    @Override
-    public Field<String> field1() {
-        return ForcedTypeCustomers.FORCED_TYPE_CUSTOMERS.CUSTOMER_TOKEN;
-    }
-
-    @Override
-    public Field<LocalDateTime> field2() {
-        return ForcedTypeCustomers.FORCED_TYPE_CUSTOMERS.CREATED_AT;
-    }
-
-    @Override
-    public Field<LocalDateTime> field3() {
-        return ForcedTypeCustomers.FORCED_TYPE_CUSTOMERS.UPDATED_AT;
-    }
-
-    @Override
-    public Field<String> field4() {
-        return ForcedTypeCustomers.FORCED_TYPE_CUSTOMERS.FIRST_NAME;
-    }
-
-    @Override
-    public Field<String> field5() {
-        return ForcedTypeCustomers.FORCED_TYPE_CUSTOMERS.LAST_NAME;
-    }
-
-    @Override
-    public Field<String> field6() {
-        return ForcedTypeCustomers.FORCED_TYPE_CUSTOMERS.EMAIL_ADDRESS;
-    }
-
-    @Override
-    public String component1() {
-        return getCustomerToken();
-    }
-
-    @Override
-    public LocalDateTime component2() {
-        return getCreatedAt();
-    }
-
-    @Override
-    public LocalDateTime component3() {
-        return getUpdatedAt();
-    }
-
-    @Override
-    public String component4() {
-        return getFirstName();
-    }
-
-    @Override
-    public String component5() {
-        return getLastName();
-    }
-
-    @Override
-    public String component6() {
-        return getEmailAddress();
-    }
-
-    @Override
-    public String value1() {
-        return getCustomerToken();
-    }
-
-    @Override
-    public LocalDateTime value2() {
-        return getCreatedAt();
-    }
-
-    @Override
-    public LocalDateTime value3() {
-        return getUpdatedAt();
-    }
-
-    @Override
-    public String value4() {
-        return getFirstName();
-    }
-
-    @Override
-    public String value5() {
-        return getLastName();
-    }
-
-    @Override
-    public String value6() {
-        return getEmailAddress();
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord value1(String value) {
-        setCustomerToken(value);
-        return this;
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord value2(LocalDateTime value) {
-        setCreatedAt(value);
-        return this;
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord value3(LocalDateTime value) {
-        setUpdatedAt(value);
-        return this;
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord value4(String value) {
-        setFirstName(value);
-        return this;
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord value5(String value) {
-        setLastName(value);
-        return this;
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord value6(String value) {
-        setEmailAddress(value);
-        return this;
-    }
-
-    @Override
-    public ForcedTypeCustomersRecord values(String value1, LocalDateTime value2, LocalDateTime value3, String value4, String value5, String value6) {
-        value1(value1);
-        value2(value2);
-        value3(value3);
-        value4(value4);
-        value5(value5);
-        value6(value6);
-        return this;
-    }
-
-    // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
 
@@ -290,6 +136,7 @@ public class ForcedTypeCustomersRecord extends UpdatableRecordImpl<ForcedTypeCus
         setFirstName(firstName);
         setLastName(lastName);
         setEmailAddress(emailAddress);
+        resetChangedOnNotNull();
     }
 
     /**
@@ -305,6 +152,7 @@ public class ForcedTypeCustomersRecord extends UpdatableRecordImpl<ForcedTypeCus
             setFirstName(value.getFirstName());
             setLastName(value.getLastName());
             setEmailAddress(value.getEmailAddress());
+            resetChangedOnNotNull();
         }
     }
 }

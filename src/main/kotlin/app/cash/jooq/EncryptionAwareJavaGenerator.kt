@@ -3,6 +3,7 @@ package app.cash.jooq
 import org.jooq.Name
 import org.jooq.Record
 import org.jooq.Table
+import org.jooq.TableOptions
 import org.jooq.codegen.GeneratorStrategy
 import org.jooq.codegen.JavaGenerator
 import org.jooq.codegen.JavaWriter
@@ -19,6 +20,8 @@ import org.jooq.meta.EmbeddableDefinition
 import org.jooq.meta.ForeignKeyDefinition
 import org.jooq.meta.IdentityDefinition
 import org.jooq.meta.IndexDefinition
+import org.jooq.meta.InverseForeignKeyDefinition
+import org.jooq.meta.ManyToManyKeyDefinition
 import org.jooq.meta.PackageDefinition
 import org.jooq.meta.ParameterDefinition
 import org.jooq.meta.SchemaDefinition
@@ -169,6 +172,14 @@ class EncryptionAwareJavaGenerator : JavaGenerator() {
 
     override fun getForeignKeys(tableDefinition: TableDefinition?): MutableList<ForeignKeyDefinition> = table.getForeignKeys(tableDefinition)
 
+    override fun getInverseForeignKeys(): MutableList<InverseForeignKeyDefinition> = table.inverseForeignKeys
+
+    override fun getInverseForeignKeys(referencing: TableDefinition?): MutableList<InverseForeignKeyDefinition> = table.getInverseForeignKeys(referencing)
+
+    override fun getManyToManyKeys(): MutableList<ManyToManyKeyDefinition> = table.manyToManyKeys
+
+    override fun getManyToManyKeys(referencing: TableDefinition?): MutableList<ManyToManyKeyDefinition> = table.getManyToManyKeys(referencing)
+
     override fun getCheckConstraints(): MutableList<CheckConstraintDefinition> = table.checkConstraints
 
     override fun getIdentity(): IdentityDefinition? = columns
@@ -187,6 +198,8 @@ class EncryptionAwareJavaGenerator : JavaGenerator() {
 
     override fun getTable(): Table<Record> = table.table
 
+    override fun getTableOptions(): TableOptions = table.tableOptions
+
     override fun getParameters(): MutableList<ParameterDefinition> = table.parameters
 
     override fun isTemporary(): Boolean = table.isTemporary
@@ -196,5 +209,7 @@ class EncryptionAwareJavaGenerator : JavaGenerator() {
     override fun isMaterializedView(): Boolean = table.isMaterializedView
 
     override fun isTableValuedFunction(): Boolean = table.isTableValuedFunction
+
+    override fun getReferencedTable(): TableDefinition = table.referencedTable
   }
 }
