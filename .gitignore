@@ -1,5 +1,4 @@
 .idea
-/bin/
 /build/
 /.gradle/
 /gradlew
