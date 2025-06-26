@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("com.vanniktech.maven.publish") version "0.25.3"
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.9.22"
 }
 
 buildscript {
@@ -22,18 +22,30 @@ dependencies {
     implementation("org.jooq:jooq-meta-extensions:3.19.1")
 
     testImplementation("org.assertj:assertj-core:3.24.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation(platform("org.junit:junit-bom:5.9.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 kotlin {
-    jvmToolchain(18)
+    jvmToolchain(17)
 }
 
-sourceSets.test {
-    java.srcDirs("src/test/jooq-generated")
+sourceSets {
+    test {
+        java {
+            srcDir("src/test/jooq-generated")
+        }
+    }
 }
 
-tasks.getByName<Test>("test") {
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter()
+        }
+    }
+}
+
+tasks.test {
     useJUnitPlatform()
 }
