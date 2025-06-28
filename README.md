@@ -6,6 +6,22 @@ The `jooq-encryption` library provides tools and interfaces to support Field Lev
 More specifically, encrypting specific database columns just before data gets written to the database,
 and decrypting data as it's being retrieved back to the application.
 
+## Building
+
+This project uses [Hermit](https://cashapp.github.io/hermit/) to manage build tool dependencies. To build the project:
+
+1. Install Hermit by following the instructions at https://cashapp.github.io/hermit/
+2. Initialize Hermit in the project directory:
+   ```bash
+   hermit init
+   ```
+3. Run the test suite:
+   ```bash
+   gradle check
+   ```
+
+## Components
+
 This library contains 2 main components:
  - `EncryptionAwareJavaGenerator`
  - `JooqKeyPrimitive`
