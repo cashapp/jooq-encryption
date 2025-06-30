@@ -1,5 +1,7 @@
 # jooq-encryption
 
+[<img src="https://img.shields.io/maven-central/v/app.cash.jooq/jooq-encryption"/>](https://central.sonatype.com/artifact/app.cash.jooq/jooq-encryption)
+
 The `jooq-encryption` library provides tools and interfaces to support Field Level Encryption 
 (FLE) for databases using the jOOQ ORM **at the application layer**.
 
