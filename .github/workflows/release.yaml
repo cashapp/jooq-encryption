@@ -18,6 +18,10 @@ jobs:
           release_version=`echo ${{ github.ref_name }} | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?'`
           echo "release_version=$release_version" >> $GITHUB_ENV
 
+      - name: Check if tag is on main branch
+        run: |
+          git branch -r --contains ${{ github.ref }} | grep -q "origin/main" || exit 1
+
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
