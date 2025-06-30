@@ -25,7 +25,7 @@ jobs:
           java-version: 17
 
       - name: Verify release tag
-        uses: cashapp/check-signature-action@v0.3.1
+        uses: cashapp/check-signature-action@v0.2.0
         id: check-tag-sig
         env:
           GH_TOKEN: ${{ github.token }}
