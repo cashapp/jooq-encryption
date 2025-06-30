@@ -47,7 +47,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_SECRET_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_SECRET_PASSPHRASE }}
           ORG_GRADLE_PROJECT_VERSION_NAME: ${{ steps.version.outputs.version }}
-        run: bin/gradle publishToMavenCentral
+        run: bin/gradle publishToMavenCentral --no-configuration-cache
 
       - name: Create GitHub release
         if: success() && github.ref_type == 'tag'
