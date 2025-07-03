@@ -1,7 +1,7 @@
 plugins {
     id("java-library")
     id("com.vanniktech.maven.publish") version "0.33.0"
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.1.0"
 }
 
 buildscript {
