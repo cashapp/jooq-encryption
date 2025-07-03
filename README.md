@@ -24,8 +24,9 @@ This project uses [Hermit](https://cashapp.github.io/hermit/) to manage build to
 
 ## Components
 
-This library contains 2 main components:
- - `EncryptionAwareJavaGenerator`
+This library contains 3 main components:
+ - `EncryptionAwareJavaGenerator` - Generates Java code with encryption support
+ - `EncryptionAwareKotlinGenerator` - Generates Kotlin code with encryption support
  - `JooqKeyPrimitive`
 
 ## Usage
@@ -37,7 +38,8 @@ In most cases, that means supplying some configuration and a database schema for
 so it could run, interpret the schema, and generate corresponding classes.  
 That configuration can be supplied with the [jOOQ Gradle plugin](https://www.jooq.org/doc/latest/manual/code-generation/codegen-gradle/).
 
-In order to support FLE, you must use the [`EncryptionAwareJavaGenerator`](src/main/kotlin/app/cash/jooq/EncryptionAwareJavaGenerator.kt).
+In order to support FLE, you must use either the [`EncryptionAwareJavaGenerator`](src/main/kotlin/app/cash/jooq/EncryptionAwareJavaGenerator.kt) 
+or [`EncryptionAwareKotlinGenerator`](src/main/kotlin/app/cash/jooq/EncryptionAwareKotlinGenerator.kt).
 
 Add the following to your gradle build file in order to add this library to jOOQ's code generation classpath:
 ```kotlin
@@ -49,13 +51,15 @@ dependencies {
 
 Then, make sure you're using the code generator class provided in this library instead of jOOQ's default code generator.  
 For example, if you're using the jOOQ Gradle plugin, specify the generator class name like so:
+
+**For Java code generation:**
 ```kotlin
 jooq {
   configurations {
     create("main") {  // name of the jOOQ configuration
       jooqConfiguration.apply {
         generator.apply {
-          name = "com.squareup.cash.jooq.EncryptionAwareJavaGenerator"
+          name = "app.cash.jooq.EncryptionAwareJavaGenerator"
           target.apply {
             // ...
           }
@@ -69,7 +73,35 @@ jooq {
 }
 ```
 
-Using the `EncryptionAwareJavagenerator` causes any column in the database that's eligible for encryption to support it.  
+**For Kotlin code generation:**
+```kotlin
+jooq {
+  configurations {
+    create("main") {  // name of the jOOQ configuration
+      jooqConfiguration.apply {
+        generator.apply {
+          name = "app.cash.jooq.EncryptionAwareKotlinGenerator"
+          target.apply {
+            // ...
+          }
+          database.apply {
+            // ...
+          }
+          generate.apply {
+            pojosAsKotlinDataClasses = true
+            kotlinNotNullPojoAttributes = false
+            kotlinNotNullRecordAttributes = false
+            kotlinDefaultedNullablePojoAttributes = true
+            kotlinDefaultedNullableRecordAttributes = true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Using either the `EncryptionAwareJavaGenerator` or `EncryptionAwareKotlinGenerator` causes any column in the database that's eligible for encryption to support it.  
 The criteria for a column to support encryption are:
  - The field must have a type of `varbinary`
  - The field must not have a forced type converter associated with
