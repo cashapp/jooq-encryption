@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * The table <code>PUBLIC.ENCRYPTED_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class EncryptedCustomers implements Serializable {
 
     private static final long serialVersionUID = 1L;

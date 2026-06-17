@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 /**
  * The table <code>PUBLIC.ENCRYPTED_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class EncryptedCustomers extends TableImpl<EncryptedCustomersRecord> {
 
     private static final long serialVersionUID = 1L;

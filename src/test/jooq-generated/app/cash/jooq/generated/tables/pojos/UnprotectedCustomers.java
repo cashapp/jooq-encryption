@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 /**
  * The table <code>PUBLIC.UNPROTECTED_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class UnprotectedCustomers implements Serializable {
 
     private static final long serialVersionUID = 1L;
