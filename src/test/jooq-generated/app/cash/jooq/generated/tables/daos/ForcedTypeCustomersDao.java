@@ -18,7 +18,7 @@ import org.jooq.impl.DAOImpl;
 /**
  * The table <code>PUBLIC.FORCED_TYPE_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class ForcedTypeCustomersDao extends DAOImpl<ForcedTypeCustomersRecord, app.cash.jooq.generated.tables.pojos.ForcedTypeCustomers, String> {
 
     /**

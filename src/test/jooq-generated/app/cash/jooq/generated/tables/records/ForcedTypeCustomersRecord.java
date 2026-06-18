@@ -15,7 +15,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 /**
  * The table <code>PUBLIC.FORCED_TYPE_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class ForcedTypeCustomersRecord extends UpdatableRecordImpl<ForcedTypeCustomersRecord> {
 
     private static final long serialVersionUID = 1L;

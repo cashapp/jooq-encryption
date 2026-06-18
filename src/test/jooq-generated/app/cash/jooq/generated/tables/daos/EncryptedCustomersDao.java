@@ -18,7 +18,7 @@ import org.jooq.impl.DAOImpl;
 /**
  * The table <code>PUBLIC.ENCRYPTED_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class EncryptedCustomersDao extends DAOImpl<EncryptedCustomersRecord, app.cash.jooq.generated.tables.pojos.EncryptedCustomers, String> {
 
     /**

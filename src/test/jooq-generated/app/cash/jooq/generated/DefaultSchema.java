@@ -19,7 +19,7 @@ import org.jooq.impl.SchemaImpl;
 /**
  * The schema <code>PUBLIC</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class DefaultSchema extends SchemaImpl {
 
     private static final long serialVersionUID = 1L;

@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 /**
  * The table <code>PUBLIC.FORCED_TYPE_CUSTOMERS</code>.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class ForcedTypeCustomers extends TableImpl<ForcedTypeCustomersRecord> {
 
     private static final long serialVersionUID = 1L;
